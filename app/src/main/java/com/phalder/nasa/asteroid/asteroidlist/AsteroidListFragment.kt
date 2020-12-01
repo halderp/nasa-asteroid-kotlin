@@ -5,7 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.phalder.nasa.asteroid.R
 import com.phalder.nasa.asteroid.databinding.FragmentAsteroidListBinding
 
@@ -25,13 +30,28 @@ class AsteroidListFragment : Fragment() {
     private lateinit var binding: FragmentAsteroidListBinding
 
     //View Model
+    private val viewModel: AsteroidListViewModel by lazy {
+        ViewModelProvider(this).get(AsteroidListViewModel::class.java)
+    }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_asteroid_list,container,false)
+
+
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        // listen for Live data
+        viewModel.apodModel.observe(viewLifecycleOwner, Observer {
+            val imgUri = it.sdImgSrcUrl.toUri().buildUpon().scheme("https").build()
+            Glide.with(binding.imageOfTheDayView.context)
+                .load(imgUri)
+                .into(binding.imageOfTheDayView)
+        })
+    }
 }
