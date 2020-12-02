@@ -92,4 +92,10 @@ dependencies {
     def version_glide = "4.8.0"
     implementation "com.github.bumptech.glide:glide:$version_glide"
 
+    // OK HTTP and Logging
+    def version_okhttp = "4.9.0"
+    implementation "com.squareup.okhttp3:okhttp:$version_okhttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$version_okhttp"
+
+
 }

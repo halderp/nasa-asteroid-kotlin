@@ -2,6 +2,8 @@ package com.phalder.nasa.asteroid.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -24,9 +26,13 @@ private val moshi = Moshi.Builder()
 
 /**
  * Use the Retrofit builder to build a retrofit object using a Moshi converter with our Moshi for APOD Endpoint
+ * Enable logging to see request/response body
  */
+private val client = OkHttpClient().newBuilder().addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)).build()
+
 private val retrofitAPOD = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
+    .client(client)
     .baseUrl(BASE_URL_APOD)
     .build()
 

@@ -17,17 +17,19 @@ class AsteroidListViewModel: ViewModel() {
     val NASA_API_KEY = "89JXbvTAyn6PdbBhlz7L5u0HGWTRuBaOwqiI9AYT"
 
     // The internal MutableLiveData data & the public LiveData to capture Picture of Day
-    private val _apodModel = MutableLiveData<APODModel>()
-    val apodModel : LiveData<APODModel>
-        get() =_apodModel
+    private val _apodImgUrl = MutableLiveData<String>()
+    val apodImgUrl : LiveData<String>
+        get() =_apodImgUrl
 
     // initializer block
     init {
+        setDefaultPicOfTheDay()
         getAstronomyPicOfTheDay()
     }
 
     private fun setDefaultPicOfTheDay() {
-        TODO("Not yet implemented")
+        // set the default picture so that user does not have to see a loading indicator
+        _apodImgUrl.value = ""
     }
 
     private fun getAstronomyPicOfTheDay() {
@@ -35,8 +37,8 @@ class AsteroidListViewModel: ViewModel() {
         val queryParamMap = mapOf("api_key" to NASA_API_KEY,"date" to getTodaysDate())
         viewModelScope.launch {
             try {
-                _apodModel.value = NasaApi.retrofitAPODService.getAstronomyPicOfDay(queryParamMap)
-                Timber.d(apodModel.value?.hdImgSrcUrl)
+                val apodModel = NasaApi.retrofitAPODService.getAstronomyPicOfDay(queryParamMap)
+                _apodImgUrl.value = apodModel.sdImgSrcUrl
             } catch (e: Exception) {
                 Timber.e(e.message)
             }

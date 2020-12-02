@@ -25,7 +25,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/backgrounds/scenic"
-            app:apodImage="@{viewModel.apodModel}" />
+            app:apodImage="@{viewModel.apodImgUrl}" />
 
         <TextView
             android:id="@+id/textViewPOD"

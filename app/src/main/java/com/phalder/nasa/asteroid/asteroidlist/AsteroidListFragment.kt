@@ -37,8 +37,8 @@ class AsteroidListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_asteroid_list,container,false)
-
+        binding = FragmentAsteroidListBinding.inflate(inflater)
+        binding.lifecycleOwner = this
 
         return binding.root
     }
@@ -46,12 +46,8 @@ class AsteroidListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // listen for Live data
-        viewModel.apodModel.observe(viewLifecycleOwner, Observer {
-            val imgUri = it.sdImgSrcUrl.toUri().buildUpon().scheme("https").build()
-            Glide.with(binding.imageOfTheDayView.context)
-                .load(imgUri)
-                .into(binding.imageOfTheDayView)
-        })
+        // bind the viewmodel to databinding which will initiate network requests
+        binding.viewModel = viewModel
+
     }
 }
