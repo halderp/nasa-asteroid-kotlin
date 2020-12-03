@@ -6,7 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.phalder.nasa.asteroid.network.APODModel
 import com.phalder.nasa.asteroid.network.NasaApi
+import com.phalder.nasa.asteroid.network.parseAsteroidsJsonResult
+import com.phalder.nasa.asteroid.network.getNextSevenDaysFormattedDates
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
@@ -25,6 +28,7 @@ class AsteroidListViewModel: ViewModel() {
     init {
         setDefaultPicOfTheDay()
         getAstronomyPicOfTheDay()
+        getNeoFeedsForSevenDays()
     }
 
     private fun setDefaultPicOfTheDay() {
@@ -34,11 +38,31 @@ class AsteroidListViewModel: ViewModel() {
 
     private fun getAstronomyPicOfTheDay() {
         // date should be of format : YYYY-MM-DD
-        val queryParamMap = mapOf("api_key" to NASA_API_KEY,"date" to getTodaysDate())
+        val sevenDaysList = getNextSevenDaysFormattedDates()
+        val queryParamMap = mapOf("api_key" to NASA_API_KEY,"date" to sevenDaysList.get(0))
         viewModelScope.launch {
             try {
                 val apodModel = NasaApi.retrofitAPODService.getAstronomyPicOfDay(queryParamMap)
-                _apodImgUrl.value = apodModel.sdImgSrcUrl
+                // Update the image view only when the media type == image . else it will show the default image
+                if (apodModel.media_type.equals("image",true))
+                    _apodImgUrl.value = apodModel.sdImgSrcUrl
+            } catch (e: Exception) {
+                Timber.e(e.message)
+            }
+        }
+    }
+    private fun getNeoFeedsForSevenDays() {
+        // date should be of format : YYYY-MM-DD
+        val sevenDaysList = getNextSevenDaysFormattedDates()
+        val startIndx = 0;
+        val endIndx = startIndx + 1;
+        val queryParamMap = mapOf("start_date" to sevenDaysList.get(startIndx),"end_date" to sevenDaysList.get(endIndx), "api_key" to NASA_API_KEY)
+        viewModelScope.launch {
+            try {
+                val response = NasaApi.retrofitFeedService.getNeoFeeds(queryParamMap)
+                val json = JSONObject(response.body())
+                val results = parseAsteroidsJsonResult(json)
+                Timber.d(results.size.toString())
             } catch (e: Exception) {
                 Timber.e(e.message)
             }
