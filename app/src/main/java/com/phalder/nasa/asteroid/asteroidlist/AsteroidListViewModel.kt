@@ -4,10 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.phalder.nasa.asteroid.network.APODModel
-import com.phalder.nasa.asteroid.network.NasaApi
-import com.phalder.nasa.asteroid.network.parseAsteroidsJsonResult
-import com.phalder.nasa.asteroid.network.getNextSevenDaysFormattedDates
+import com.phalder.nasa.asteroid.network.*
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import timber.log.Timber
@@ -23,6 +20,11 @@ class AsteroidListViewModel: ViewModel() {
     private val _apodImgUrl = MutableLiveData<String>()
     val apodImgUrl : LiveData<String>
         get() =_apodImgUrl
+
+    // Livedata for Neo Feed List
+    private val _neoFeedList = MutableLiveData<List<Asteroid>>()
+    val neoFeedList : LiveData<List<Asteroid>>
+        get() = _neoFeedList
 
     // initializer block
     init {
@@ -55,14 +57,14 @@ class AsteroidListViewModel: ViewModel() {
         // date should be of format : YYYY-MM-DD
         val sevenDaysList = getNextSevenDaysFormattedDates()
         val startIndx = 0;
-        val endIndx = startIndx + 1;
+        val endIndx = startIndx + 7;
         val queryParamMap = mapOf("start_date" to sevenDaysList.get(startIndx),"end_date" to sevenDaysList.get(endIndx), "api_key" to NASA_API_KEY)
         viewModelScope.launch {
             try {
                 val response = NasaApi.retrofitFeedService.getNeoFeeds(queryParamMap)
                 val json = JSONObject(response.body())
-                val results = parseAsteroidsJsonResult(json)
-                Timber.d(results.size.toString())
+                _neoFeedList.value = parseAsteroidsJsonResult(json)
+                Timber.d(neoFeedList.value?.size.toString())
             } catch (e: Exception) {
                 Timber.e(e.message)
             }

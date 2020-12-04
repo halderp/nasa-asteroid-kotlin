@@ -31,6 +31,7 @@
             android:id="@+id/textViewPOD"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="#40141414"
             android:fontFamily="@font/artifika"
             android:text="@string/image_of_the_day"
             android:textAlignment="center"
@@ -40,5 +41,17 @@
             app:layout_constraintBottom_toBottomOf="@+id/image_of_the_day_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/neofeed_recylerlist"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:backgroundTint="@color/black"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_of_the_day_view" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

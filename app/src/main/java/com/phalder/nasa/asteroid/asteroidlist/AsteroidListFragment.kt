@@ -39,15 +39,23 @@ class AsteroidListFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentAsteroidListBinding.inflate(inflater)
         binding.lifecycleOwner = this
+        // bind the viewmodel to databinding which will initiate network requests
+        binding.viewModel = viewModel
 
+        val adapter = NeoFeedListAdapter()
+        binding.neofeedRecylerlist.adapter = adapter
+
+        // observe the neo feed list
+        viewModel.neoFeedList.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // bind the viewmodel to databinding which will initiate network requests
-        binding.viewModel = viewModel
 
     }
 }

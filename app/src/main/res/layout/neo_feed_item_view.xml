@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="asteroid"
+            type="com.phalder.nasa.asteroid.network.Asteroid" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/itemMainlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/black"
+        android:textSize="24sp">
+
+        <ImageView
+            android:id="@+id/status_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            app:neoStatusImage="@{asteroid}"
+            android:contentDescription="@string/status_image_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:srcCompat="@drawable/ic_status_normal" />
+
+        <TextView
+            android:id="@+id/codename_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:text="@{asteroid.codename}"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/status_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/status_image"
+            tools:text="CodeName" />
+
+        <TextView
+            android:id="@+id/date_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:text="@{asteroid.closeApproachDate}"
+            app:layout_constraintBottom_toBottomOf="@+id/status_image"
+            app:layout_constraintEnd_toStartOf="@+id/status_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/codename_text"
+            tools:text="2020-12-25" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
