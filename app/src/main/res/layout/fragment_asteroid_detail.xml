@@ -90,6 +90,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/abs_mag_title"
                 tools:text="19.90000000 au" />
 
+            <ImageView
+                android:id="@+id/more_info_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="32dp"
+                android:src="@drawable/ic_help_circle"
+                app:layout_constraintBottom_toBottomOf="@+id/abs_mag_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/abs_mag_title"
+                app:layout_constraintTop_toTopOf="@+id/abs_mag_title" />
+
             <TextView
                 android:id="@+id/est_diameter_title"
                 android:layout_width="wrap_content"
