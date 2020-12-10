@@ -1,10 +1,13 @@
 package com.phalder.nasa.asteroid.asteroiddetail
 
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.phalder.nasa.asteroid.R
@@ -35,7 +38,27 @@ class AsteroidDetailFragment : Fragment() {
         val viewModelFactory = AsteroidDetailViewModelFactory(arguments.asteroidArg)
         val asteroidDetailViewModel = ViewModelProvider(this,viewModelFactory).get(AsteroidDetailViewModel::class.java)
         binding.asteroiddetailviewmodel = asteroidDetailViewModel
+
+        // handle click for the More Info Image
+        binding.moreInfoImage.setOnClickListener{
+            //Toast.makeText(activity, "You clicked on ImageView.", Toast.LENGTH_SHORT).show()
+            showMoreInfoDialog()
+        }
         return binding.root
+    }
+
+    private fun showMoreInfoDialog() {
+        // build alert dialog
+        val dialogBuilder = activity?.let { AlertDialog.Builder(it) }
+        val positiveButtonClick = { dialog: DialogInterface, which: Int ->
+            // do nothing just dismiss
+        }
+        with (dialogBuilder)
+        {
+            this?.setMessage(R.string.astronomica_unit_explanation)
+            this?.setPositiveButton( "Ok", DialogInterface.OnClickListener(function = positiveButtonClick))
+            this?.show()
+        }
     }
 
 }

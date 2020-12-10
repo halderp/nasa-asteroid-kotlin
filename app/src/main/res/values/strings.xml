@@ -9,4 +9,5 @@
     <string name="estimated_diameter">Estimated Diameter</string>
     <string name="relative_velocity">Relative Velocity</string>
     <string name="distance_from_earth">Distance from Earth</string>
+    <string name="astronomica_unit_explanation">The astronomical unit (au) is a unit of length, roughly the distance from Earth to the Sun and equal to about 150 million kilometres (93 million miles)</string>
 </resources>
