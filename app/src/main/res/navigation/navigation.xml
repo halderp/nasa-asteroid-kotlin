@@ -9,5 +9,22 @@
         android:id="@+id/asteroidListFragment"
         android:name="com.phalder.nasa.asteroid.asteroidlist.AsteroidListFragment"
         android:label="fragment_asteroid_list"
-        tools:layout="@layout/fragment_asteroid_list" />
+        tools:layout="@layout/fragment_asteroid_list" >
+        <action
+            android:id="@+id/action_asteroidListFragment_to_asteroidDetailFragment"
+            app:destination="@id/asteroidDetailFragment"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/asteroidDetailFragment"
+        android:name="com.phalder.nasa.asteroid.asteroiddetail.AsteroidDetailFragment"
+        android:label="fragment_asteroid_detail"
+        tools:layout="@layout/fragment_asteroid_detail" >
+        <argument
+            android:name="asteroidArg"
+            app:argType="com.phalder.nasa.asteroid.network.Asteroid" />
+    </fragment>
 </navigation>

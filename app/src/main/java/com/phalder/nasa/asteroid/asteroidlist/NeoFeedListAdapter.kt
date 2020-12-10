@@ -9,7 +9,7 @@ import com.phalder.nasa.asteroid.R
 import com.phalder.nasa.asteroid.databinding.NeoFeedItemViewBinding
 import com.phalder.nasa.asteroid.network.Asteroid
 
-class NeoFeedListAdapter: ListAdapter<Asteroid, NeoFeedListAdapter.ViewHolder>(AsteroidDiffCallback())  {
+class NeoFeedListAdapter(val clickListener: AsteroidItemClickListener): ListAdapter<Asteroid, NeoFeedListAdapter.ViewHolder>(AsteroidDiffCallback())  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -17,15 +17,16 @@ class NeoFeedListAdapter: ListAdapter<Asteroid, NeoFeedListAdapter.ViewHolder>(A
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(clickListener, item!!)
     }
 
     class  ViewHolder private constructor(val binding: NeoFeedItemViewBinding) : RecyclerView.ViewHolder(binding.root){
 
         // populates the data into view holder. Viewholder knows the details of internal structure it can take care of
         // binding data to its views
-        fun bind(item: Asteroid) {
+        fun bind(clickListener:AsteroidItemClickListener, item: Asteroid) {
             binding.asteroid = item
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
         companion object {
@@ -48,5 +49,9 @@ class AsteroidDiffCallback : DiffUtil.ItemCallback<Asteroid>() {
         // Asteroid is Kotlin data class automatically checks all member of Asteroid
         return oldItem == newItem
     }
+}
+
+class AsteroidItemClickListener(val clickListener: (asteroid: Asteroid) -> Unit) {
+    fun onClick(item: Asteroid) = clickListener(item)
 }
 
