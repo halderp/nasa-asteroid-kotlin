@@ -46,8 +46,6 @@ class AsteroidListFragment : Fragment() {
         binding.viewModel = viewModel
 
         val adapter = NeoFeedListAdapter(AsteroidItemClickListener { asteroid ->
-            Toast.makeText(context, "${asteroid.id}", Toast.LENGTH_LONG).show()
-
             // Navigate to details fragment . Parameter is the Clicked Asteroid
             findNavController().navigate(AsteroidListFragmentDirections.actionAsteroidListFragmentToAsteroidDetailFragment(asteroid))
 

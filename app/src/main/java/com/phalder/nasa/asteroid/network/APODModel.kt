@@ -17,9 +17,9 @@ data class APODModel (
         val copyright : String ="", // Copyright attribute missing sometimes in JSON response. Defaulting it to empty string
         val date : String,
         val explanation : String,
-        @Json(name = "hdurl") val hdImgSrcUrl : String,
+        @Json(name = "hdurl") val hdImgSrcUrl : String = "",
         val media_type : String,
         val service_version : String,
         val title : String,
-        @Json(name = "url") val sdImgSrcUrl : String
+        @Json(name = "url") val sdImgSrcUrl : String = ""
 )

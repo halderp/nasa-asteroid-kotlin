@@ -36,3 +36,14 @@ fun ImageView.bindNeoStatusImage(item:Asteroid?) {
             setImageResource(R.drawable.ic_status_normal)
     }
 }
+
+@BindingAdapter("asteroidImage")
+fun bindAsteroidImage(asteroidImgView: ImageView, item:Asteroid?) {
+    if (item != null) {
+        if (item.isPotentiallyHazardous == true)
+            asteroidImgView.setImageResource(R.drawable.asteroid_hazardous)
+        else
+            asteroidImgView.setImageResource(R.drawable.asteroid_safe)
+    }
+}
+
