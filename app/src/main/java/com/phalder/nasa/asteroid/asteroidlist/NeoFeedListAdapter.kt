@@ -5,9 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.phalder.nasa.asteroid.R
 import com.phalder.nasa.asteroid.databinding.NeoFeedItemViewBinding
-import com.phalder.nasa.asteroid.network.Asteroid
+import com.phalder.nasa.asteroid.database.Asteroid
 
 class NeoFeedListAdapter(val clickListener: AsteroidItemClickListener): ListAdapter<Asteroid, NeoFeedListAdapter.ViewHolder>(AsteroidDiffCallback())  {
 

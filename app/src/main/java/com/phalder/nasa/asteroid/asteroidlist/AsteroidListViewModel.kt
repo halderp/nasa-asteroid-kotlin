@@ -1,30 +1,33 @@
 package com.phalder.nasa.asteroid.asteroidlist
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.app.Application
+import androidx.lifecycle.*
+import com.phalder.nasa.asteroid.database.Asteroid
+import com.phalder.nasa.asteroid.database.AsteroidDatabase
 import com.phalder.nasa.asteroid.network.*
+import com.phalder.nasa.asteroid.repository.AsteroidRepository
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AsteroidListViewModel: ViewModel() {
+class AsteroidListViewModel(application: Application): AndroidViewModel(application) {
 
     // constants definitions
     val NASA_API_KEY = "89JXbvTAyn6PdbBhlz7L5u0HGWTRuBaOwqiI9AYT"
+
+    // Database and Repository
+    private val asteroidDatabase = AsteroidDatabase.getInstance(application)
+    private val asteroidRepository = AsteroidRepository(asteroidDatabase)
 
     // The internal MutableLiveData data & the public LiveData to capture Picture of Day
     private val _apodImgUrl = MutableLiveData<String>()
     val apodImgUrl : LiveData<String>
         get() =_apodImgUrl
 
-    // Livedata for Neo Feed List
-    private val _neoFeedList = MutableLiveData<List<Asteroid>>()
-    val neoFeedList : LiveData<List<Asteroid>>
-        get() = _neoFeedList
+    // Livedata for Neo Feed/Asteroid List
+    val neoFeedList = asteroidRepository.asteroids
 
     // initializer block
     init {
@@ -54,28 +57,9 @@ class AsteroidListViewModel: ViewModel() {
         }
     }
     private fun getNeoFeedsForSevenDays() {
-        // date should be of format : YYYY-MM-DD
-        val sevenDaysList = getNextSevenDaysFormattedDates()
-        val startIndx = 0;
-        val endIndx = startIndx + 7;
-        val queryParamMap = mapOf("start_date" to sevenDaysList.get(startIndx),"end_date" to sevenDaysList.get(endIndx), "api_key" to NASA_API_KEY)
         viewModelScope.launch {
-            try {
-                val response = NasaApi.retrofitFeedService.getNeoFeeds(queryParamMap)
-                val json = JSONObject(response.body())
-                _neoFeedList.value = parseAsteroidsJsonResult(json)
-                Timber.d(neoFeedList.value?.size.toString())
-            } catch (e: Exception) {
-                Timber.e(e.message)
-            }
+            asteroidRepository.refreshAsteroids()
         }
-    }
-
-    private fun getTodaysDate(): String {
-        var date = Date()
-        val formatter = SimpleDateFormat("yyyy-MM-dd")
-        val answer:String =  formatter.format(date)
-        return answer
     }
 
 }

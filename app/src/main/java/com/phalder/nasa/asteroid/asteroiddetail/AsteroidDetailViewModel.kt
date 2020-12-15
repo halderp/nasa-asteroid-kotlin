@@ -1,7 +1,7 @@
 package com.phalder.nasa.asteroid.asteroiddetail
 
 import androidx.lifecycle.ViewModel
-import com.phalder.nasa.asteroid.network.Asteroid
+import com.phalder.nasa.asteroid.database.Asteroid
 
 class AsteroidDetailViewModel (val asteroid: Asteroid): ViewModel() {
 

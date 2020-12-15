@@ -1,13 +1,11 @@
 package com.phalder.nasa.asteroid
 
-import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.phalder.nasa.asteroid.network.Asteroid
+import com.phalder.nasa.asteroid.database.Asteroid
 
 
 // This is the binding adaptor for Displaying "Image of the day" using Glide.
@@ -28,7 +26,7 @@ fun bindApodImage(apodImageView: ImageView, apodImgUrl: String?) {
 // This is the binding adaptor for Displaying Status Image of Asteroid whether it is hazardous or not.
 // Second Type of Binding of ImageView
 @BindingAdapter("neoStatusImage")
-fun ImageView.bindNeoStatusImage(item:Asteroid?) {
+fun ImageView.bindNeoStatusImage(item: Asteroid?) {
     if (item != null) {
         if (item.isPotentiallyHazardous == true)
             setImageResource(R.drawable.ic_status_potentially_hazardous)
@@ -38,7 +36,7 @@ fun ImageView.bindNeoStatusImage(item:Asteroid?) {
 }
 
 @BindingAdapter("asteroidImage")
-fun bindAsteroidImage(asteroidImgView: ImageView, item:Asteroid?) {
+fun bindAsteroidImage(asteroidImgView: ImageView, item: Asteroid?) {
     if (item != null) {
         if (item.isPotentiallyHazardous == true)
             asteroidImgView.setImageResource(R.drawable.asteroid_hazardous)

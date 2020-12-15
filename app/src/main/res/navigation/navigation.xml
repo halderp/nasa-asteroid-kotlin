@@ -25,6 +25,6 @@
         tools:layout="@layout/fragment_asteroid_detail" >
         <argument
             android:name="asteroidArg"
-            app:argType="com.phalder.nasa.asteroid.network.Asteroid" />
+            app:argType="com.phalder.nasa.asteroid.database.Asteroid" />
     </fragment>
 </navigation>
