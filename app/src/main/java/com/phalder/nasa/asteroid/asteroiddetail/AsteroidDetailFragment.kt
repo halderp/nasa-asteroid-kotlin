@@ -56,7 +56,7 @@ class AsteroidDetailFragment : Fragment() {
         with (dialogBuilder)
         {
             this?.setMessage(R.string.astronomica_unit_explanation)
-            this?.setPositiveButton( "To Accept", DialogInterface.OnClickListener(function = positiveButtonClick))
+            this?.setPositiveButton( R.string.positive_button_text, DialogInterface.OnClickListener(function = positiveButtonClick))
             this?.show()
         }
     }

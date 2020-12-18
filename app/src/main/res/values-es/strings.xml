@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="image_of_the_day">Imagen del dia</string>
+    <string name="status_image_description">status_image_description</string>
+    <string name="close_approach_date_title">Fecha de aproximación cercana</string>
+    <string name="absolute_magnitude">Magnitud absoluta</string>
+    <string name="estimated_diameter">Diámetro estimado</string>
+    <string name="relative_velocity">Velocidad relativa</string>
+    <string name="distance_from_earth">Distancia de la Tierra</string>
+    <string name="positive_button_text">Aceptar</string>
+    <string name="astronomica_unit_explanation">La unidad astronómica (au) es una unidad de longitud, aproximadamente la distancia de la Tierra al Sol e igual a unos 150 millones de kilómetros (93 millones de millas).</string>
+
+</resources>
