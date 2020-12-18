@@ -18,6 +18,7 @@
 
         <ImageView
             android:id="@+id/image_of_the_day_view"
+            android:contentDescription="@string/img_of_day_cd"
             android:layout_width="0dp"
             android:layout_height="250dp"
             android:scaleType="centerCrop"

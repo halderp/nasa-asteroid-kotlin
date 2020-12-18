@@ -24,6 +24,7 @@
 
             <ImageView
                 android:id="@+id/imageView"
+                android:contentDescription="@string/asteroid_img_cd"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/image_view_height"
                 app:asteroidImage="@{asteroiddetailviewmodel.asteroid}"
@@ -88,8 +89,9 @@
 
             <ImageView
                 android:id="@+id/more_info_image"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:contentDescription="@string/more_info_img_cd"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginEnd="@dimen/margin_top_large"
                 android:clickable="true"
                 android:src="@drawable/ic_help_circle"

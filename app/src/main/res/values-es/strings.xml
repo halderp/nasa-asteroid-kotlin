@@ -9,5 +9,8 @@
     <string name="distance_from_earth">Distancia de la Tierra</string>
     <string name="positive_button_text">Aceptar</string>
     <string name="astronomica_unit_explanation">La unidad astronómica (au) es una unidad de longitud, aproximadamente la distancia de la Tierra al Sol e igual a unos 150 millones de kilómetros (93 millones de millas).</string>
+    <string name="img_of_day_cd">Imagen del día de la NASA</string>
+    <string name="more_info_img_cd">Más información sobre la unidad astronómica</string>
+    <string name="asteroid_img_cd">Imagen del asteroide</string>
 
 </resources>

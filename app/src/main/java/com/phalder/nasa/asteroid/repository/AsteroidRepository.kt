@@ -19,7 +19,7 @@ class AsteroidRepository(private val database: AsteroidDatabase) {
     var starDate: String = sevenDaysList.get(0)
     var endDate : String = sevenDaysList.get(7)
 
-    val asteroids : LiveData<List<Asteroid>> = database.asteroidDatabaseDao.getAllAsteroids()
+    val asteroids : LiveData<List<Asteroid>> = database.asteroidDatabaseDao.getAllSortedAsteroids(starDate,endDate)
 
     // This function will make a call to network to get the Asteroid data and save it in database
     suspend fun refreshAsteroids() {
