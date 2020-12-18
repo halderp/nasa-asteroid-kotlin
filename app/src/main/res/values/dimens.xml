@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="image_view_height">200dp</dimen>
+    <dimen name="margin_top_small">8dp</dimen>
+    <dimen name="margin_top_medium">24dp</dimen>
+    <dimen name="margin_top_large">32dp</dimen>
+    <dimen name="margin_start_medium">16dp</dimen>
+    <dimen name="margin_end_medium">16dp</dimen>
+    <dimen name="margin_bottom_medium">24dp</dimen>
+    <dimen name="padding_start_medium">16dp</dimen>
+    <dimen name="padding_end_medium">16dp</dimen>
+</resources>

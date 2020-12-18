@@ -48,15 +48,15 @@ class AsteroidDetailFragment : Fragment() {
     }
 
     private fun showMoreInfoDialog() {
-        // build alert dialog
-        val dialogBuilder = activity?.let { AlertDialog.Builder(it) }
+        // build alert dialog. Apply custom style so that background is white and text is black and button text is red
+        val dialogBuilder = activity?.let { AlertDialog.Builder(it,R.style.AlertDialogCustom) }
         val positiveButtonClick = { dialog: DialogInterface, which: Int ->
             // do nothing just dismiss
         }
         with (dialogBuilder)
         {
             this?.setMessage(R.string.astronomica_unit_explanation)
-            this?.setPositiveButton( "Ok", DialogInterface.OnClickListener(function = positiveButtonClick))
+            this?.setPositiveButton( "To Accept", DialogInterface.OnClickListener(function = positiveButtonClick))
             this?.show()
         }
     }
