@@ -12,7 +12,7 @@ import org.json.JSONObject
 import timber.log.Timber
 
 class AsteroidRepository(private val database: AsteroidDatabase) {
-    val NASA_API_KEY = "89JXbvTAyn6PdbBhlz7L5u0HGWTRuBaOwqiI9AYT"
+    val NASA_API_KEY = "DEMO_KEY"
 
     // Date Range related properties
     val sevenDaysList = getNextSevenDaysFormattedDates()
